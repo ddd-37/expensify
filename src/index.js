@@ -143,23 +143,33 @@ const filterReducer = (state = filtersReducerDefaultState, action) => {
 
 // Get visible expenses
 const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
-  return expenses.filter(expense => {
-    // If start date is not a number, we don't need to care about the startDate
-    // OR the created date occured after the startDate we're looking for
-    const startDateMatch =
-      typeof startDate !== "number" || expense.createdAt >= startDate;
+  return expenses
+    .filter(expense => {
+      // If start date is not a number, we don't need to care about the startDate
+      // OR the created date occured after the startDate we're looking for
+      const startDateMatch =
+        typeof startDate !== "number" || expense.createdAt >= startDate;
 
-    // If start date is not a number, we don't need to care about the startDate
-    // OR the created date occured before the startDate we're looking for
-    const endDateMatch =
-      typeof endDate !== "number" || expense.createdAt <= endDate;
+      // If start date is not a number, we don't need to care about the startDate
+      // OR the created date occured before the startDate we're looking for
+      const endDateMatch =
+        typeof endDate !== "number" || expense.createdAt <= endDate;
 
-    const textMatch = expense.description
-      .toLowerCase()
-      .includes(text.toLowerCase());
+      const textMatch = expense.description
+        .toLowerCase()
+        .includes(text.toLowerCase());
 
-    return startDateMatch && endDateMatch && textMatch;
-  });
+      return startDateMatch && endDateMatch && textMatch;
+    })
+    .sort((a, b) => {
+      if (sortBy === "date") {
+        return a.createdAt < b.createdAt ? 1 : -1;
+      }
+
+      if (sortBy === "amount") {
+        return a.amount < b.amount ? 1 : -1;
+      }
+    });
 };
 
 // Store creation
@@ -177,7 +187,7 @@ store.subscribe(() => {
 });
 
 const expenseOne = store.dispatch(
-  addExpense({ description: "Rent", amount: 111100, createdAt: 1000 })
+  addExpense({ description: "Rent", amount: 111100, createdAt: -21000 })
 );
 const expenseTwo = store.dispatch(
   addExpense({ description: "Dinner", amount: 4000, createdAt: -1000 })
@@ -187,10 +197,10 @@ const expenseTwo = store.dispatch(
 
 // store.dispatch(editExpense(expenseTwo.expense.id, { amount: 500 }));
 
-store.dispatch(setTextFilter("rent"));
+// store.dispatch(setTextFilter("rent"));
 // store.dispatch(setTextFilter("boogaloo"));
 
-// store.dispatch(sortByAmount());
+store.dispatch(sortByAmount());
 // store.dispatch(sortByDate());
 
 // store.dispatch(setStartDate(0));
