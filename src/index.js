@@ -13,6 +13,7 @@ import configureStore from "./redux/store/configureStore";
 import { addExpense } from "./redux/actions/expenses";
 import { setTextFilter } from "./redux/actions/filters";
 import getVisibleExpenses from "./redux/selectors/expenses";
+import { Provider } from "react-redux"; // Provides the store to all the components that make up our application
 const store = configureStore();
 
 store.dispatch(addExpense({ description: "Water bill" }));
@@ -24,4 +25,10 @@ store.dispatch(setTextFilter("gas"));
 const state = store.getState();
 console.log(getVisibleExpenses(state.expenses, state.filters));
 
-ReactDOM.render(<AppRouter />, document.getElementById("root"));
+const jsx = (
+  <Provider store={state}>
+    <AppRouter />
+  </Provider>
+);
+
+ReactDOM.render(jsx, document.getElementById("root"));
