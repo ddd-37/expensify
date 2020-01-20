@@ -16,7 +16,9 @@ import { setTextFilter } from "./redux/actions/filters";
 import { Provider } from "react-redux"; // Provides the store to all the components that make up our application
 const store = configureStore();
 
-store.dispatch(addExpense({ description: "Water bill" }));
+store.dispatch(
+  addExpense({ description: "Water bill", amount: 4000, createdAt: "today" })
+);
 store.dispatch(addExpense({ description: "Gas bill" }));
 
 store.dispatch(setTextFilter("water"));
