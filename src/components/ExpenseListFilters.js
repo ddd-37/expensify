@@ -1,8 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setTextFilter } from "../redux/actions/filters";
+import {
+  setTextFilter,
+  sortByAmount,
+  sortByDate
+} from "../redux/actions/filters";
 
 const ExpenseListFilters = props => {
+  console.log("TCL: props", props);
   return (
     <div>
       <input
@@ -12,6 +17,16 @@ const ExpenseListFilters = props => {
           console.log(e.target.value);
         }}
       />
+      <select
+        value={props.filters.sortBy}
+        onChange={e => {
+          e.target.value === "date" && props.dispatch(sortByDate());
+          e.target.value === "amount" && props.dispatch(sortByAmount());
+        }}
+      >
+        <option value="date">Date</option>
+        <option value="amount">Amount</option>
+      </select>
     </div>
   );
 };
