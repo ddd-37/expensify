@@ -4,7 +4,6 @@ import ExpenseListItem from "./ExpenseListItem";
 import selectExpenses from "../redux/selectors/expenses";
 
 const ExpenseList = props => {
-  console.log("TCL: props", props);
   return (
     <div>
       <h1>Expense List</h1>

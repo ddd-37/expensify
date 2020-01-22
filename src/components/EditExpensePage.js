@@ -5,8 +5,6 @@ import ExpenseForm from "./ExpenseForm";
 import { editExpense, removeExpense } from "../redux/actions/expenses";
 
 const EditExpensePage = props => {
-  console.log("TCL: props", props);
-
   return (
     <div>
       <ExpenseForm

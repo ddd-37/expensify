@@ -4,9 +4,6 @@ import { SingleDatePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 import "react-dates/initialize";
 
-const now = moment();
-console.log("TCL: now", now.format("MMM, Do, YYYY"));
-
 export default class ExpenseForm extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +37,6 @@ export default class ExpenseForm extends Component {
     if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
       this.setState({ amount });
     }
-    console.log("TCL: ExpenseForm -> amount", amount);
   };
 
   onDateChange = createdAt => {
