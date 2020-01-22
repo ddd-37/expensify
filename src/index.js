@@ -15,7 +15,9 @@ import { Provider } from "react-redux"; // Provides the store to all the compone
 const store = configureStore();
 
 store.dispatch(addExpense({ description: "Water bill", amount: 4000 }));
-store.dispatch(addExpense({ description: "Gas bill", createdAt: 1000 }));
+store.dispatch(
+  addExpense({ description: "Gas bill", createdAt: 3232290033200 })
+);
 store.dispatch(addExpense({ description: "Rent bill", amount: 102942 }));
 
 const jsx = (

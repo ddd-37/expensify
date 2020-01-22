@@ -8,14 +8,17 @@ const now = moment();
 console.log("TCL: now", now.format("MMM, Do, YYYY"));
 
 export default class ExpenseForm extends Component {
-  state = {
-    description: "",
-    amount: "",
-    note: "",
-    createdAt: new moment(),
-    calendarFocused: false,
-    error: null
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      description: props.expense ? props.expense.description : "",
+      amount: props.expense ? (props.expense.amount / 100).toString() : "",
+      note: props.expense ? props.expense.note : "",
+      createdAt: props.expense ? moment(props.expense.createdAt) : new moment(),
+      calendarFocused: false,
+      error: null
+    };
+  }
 
   onDescriptionChange = e => {
     const description = e.target.value;
