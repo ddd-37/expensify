@@ -5,7 +5,7 @@ import { addExpense } from "./../redux/actions/expenses";
 
 const AddExpensePage = props => (
   <div>
-    <h1>Add expense </h1>
+    <h1>Add expdense </h1>
     <ExpenseForm
       onSubmit={expense => {
         props.dispatch(addExpense(expense));
