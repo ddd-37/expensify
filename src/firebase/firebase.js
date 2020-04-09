@@ -19,12 +19,16 @@ const db = firebase.database();
 console.log("request started");
 db.ref()
   .set({
-    name: "Finn",
-    city: "Ft Worth",
-    age: 9,
+    name: "Sid",
+    age: 12,
+    stressLevel: 5,
+    job: {
+      title: "Meower",
+      company: "Meowers Inc",
+    },
     isCat: true,
     location: {
-      city: "Denver",
+      city: "Dallas",
       country: "USA",
     },
   })
@@ -35,16 +39,21 @@ db.ref()
     console.log("ruh roh, romething went wront raggy", e);
   });
 
-//db.ref().set("herefsf be some data");
-
-db.ref("attributes")
-  .set({
-    height: 30,
-    weight: 18,
+db.ref()
+  .update({
+    stressLevel: 9,
+    "job/company": "Freelance Pooper",
+    "location/city": "Denver",
   })
   .then(() => {
-    console.log("succesfully udpate");
-  })
-  .catch((e) => {
-    console.log("ruh roh, romething went wront raggy", e);
+    console.log("Succesful Update!");
   });
+
+// db.ref("isCat")
+//   .remove()
+//   .then(() => {
+//     console.log("ref removed!");
+//   })
+//   .catch((e) => {
+//     console.log("ruh roh, romething went wront raggy", e);
+//   });
