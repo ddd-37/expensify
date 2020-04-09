@@ -15,6 +15,7 @@ import { Provider } from "react-redux"; // Provides the store to all the compone
 
 //FIREBASE
 import "./firebase/firebase.js";
+import "./examples/promises";
 const store = configureStore();
 
 store.dispatch(addExpense({ description: "Water bill", amount: 4000 }));
