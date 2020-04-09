@@ -1,7 +1,18 @@
 const promise = new Promise((res, rej) => {
-  res("RESOLVED!");
+  setTimeout(() => {
+    // res("RESOLVED!");
+    // res("SECOND RESOLVE!");
+    rej("this is my error");
+  }, 1000);
 });
 
-promise.then((data) => {
-  console.log("data", data);
-});
+console.log("before");
+promise
+  .then((data) => {
+    console.log("1", data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+console.log("after");

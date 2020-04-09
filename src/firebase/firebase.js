@@ -16,24 +16,35 @@ console.log("test");
 
 const db = firebase.database();
 
-db.ref().set({
-  name: "Finffffn",
-  city: "Ft Worth",
-  age: 9,
-  isCat: true,
-  location: {
-    city: "Denver",
-    country: "USA",
-  },
-});
+console.log("request started");
+db.ref()
+  .set({
+    name: "Finn",
+    city: "Ft Worth",
+    age: 9,
+    isCat: true,
+    location: {
+      city: "Denver",
+      country: "USA",
+    },
+  })
+  .then(() => {
+    console.log("saved ddata");
+  })
+  .catch((e) => {
+    console.log("ruh roh, romething went wront raggy", e);
+  });
 
 //db.ref().set("herefsf be some data");
 
-db.ref("age").set(37);
-db.ref("location/city").set("Oaxaca");
-db.ref("attributes").set({
-  height: 30,
-  weight: 18,
-});
-
-console.log("request");
+db.ref("attributes")
+  .set({
+    height: 30,
+    weight: 18,
+  })
+  .then(() => {
+    console.log("succesfully udpate");
+  })
+  .catch((e) => {
+    console.log("ruh roh, romething went wront raggy", e);
+  });
