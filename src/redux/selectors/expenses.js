@@ -3,7 +3,8 @@ import moment from "moment";
 // Get visible expenses
 export default (expenses, { text, sortBy, startDate, endDate }) => {
   return expenses
-    .filter(expense => {
+    .filter((expense) => {
+      console.log("expense", expense.createdAt);
       const createdAtMoment = moment(expense.createdAt);
       // If start date is not a number, we don't need to care about the startDate
       // OR the created date occured after the startDate we're looking for
