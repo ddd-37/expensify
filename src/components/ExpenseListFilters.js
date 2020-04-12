@@ -5,27 +5,23 @@ import {
   sortByAmount,
   sortByDate,
   setStartDate,
-  setEndDate
+  setEndDate,
 } from "../redux/actions/filters";
 import { DateRangePicker } from "react-dates";
 
 class ExpenseListFilters extends Component {
   state = {
-    calendarFocused: null
+    calendarFocused: null,
   };
 
   onDatesChange = ({ startDate, endDate }) => {
-    console.log(
-      "TCL: ExpenseListFilters -> onDatesChange -> startDate",
-      startDate
-    );
     this.props.dispatch(setStartDate(startDate));
     this.props.dispatch(setEndDate(endDate));
   };
 
-  onFocusChange = calendarFocused => {
+  onFocusChange = (calendarFocused) => {
     this.setState({
-      calendarFocused
+      calendarFocused,
     });
   };
 
@@ -34,13 +30,13 @@ class ExpenseListFilters extends Component {
       <div>
         <input
           type="text"
-          onChange={e => {
+          onChange={(e) => {
             this.props.dispatch(setTextFilter(e.target.value));
           }}
         />
         <select
           value={this.props.filters.sortBy}
-          onChange={e => {
+          onChange={(e) => {
             e.target.value === "date" && this.props.dispatch(sortByDate());
             e.target.value === "amount" && this.props.dispatch(sortByAmount());
           }}
@@ -65,9 +61,9 @@ class ExpenseListFilters extends Component {
   }
 }
 
-const mapStateToPros = state => {
+const mapStateToPros = (state) => {
   return {
-    filters: state.filters
+    filters: state.filters,
   };
 };
 

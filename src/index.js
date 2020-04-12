@@ -11,6 +11,7 @@ import AppRouter from "./routers/AppRouter";
 //REDUX
 import configureStore from "./redux/store/configureStore";
 import { Provider } from "react-redux"; // Provides the store to all the components that make up our application
+import { startSetExpenses } from "./redux/actions/expenses";
 
 //FIREBASE
 import "./firebase/firebase.js";
@@ -22,4 +23,8 @@ const jsx = (
   </Provider>
 );
 
-ReactDOM.render(jsx, document.getElementById("root"));
+ReactDOM.render(<p>Loading...</p>, document.getElementById("root"));
+
+store.dispatch(startSetExpenses()).then(() => {
+  ReactDOM.render(jsx, document.getElementById("root"));
+});

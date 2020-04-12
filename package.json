@@ -20,9 +20,10 @@
     "uuid": "^3.3.3"
   },
   "scripts": {
-    "start": "concurrently \"node server/server.js\" \"react-scripts start\" ",
+    "start": "node server/server.js",
+    "dev": "concurrently \"node server/server.js\" \"react-scripts start\" ",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "cross-env NODE_ENV=test react-scripts test",
     "eject": "react-scripts eject",
     "server": "node server/server.js",
     "heroku-postbuild": "npm run build"
@@ -45,6 +46,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1"
+    "@testing-library/user-event": "^7.2.1",
+    "cross-env": "^7.0.2"
   }
 }

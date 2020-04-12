@@ -4,7 +4,6 @@ import ExpenseForm from "./ExpenseForm";
 import { startAddExpense } from "./../redux/actions/expenses";
 
 const AddExpensePage = (props) => {
-  console.log("props", props);
   return (
     <div>
       <h1>Add expdense </h1>
