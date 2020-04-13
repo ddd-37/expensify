@@ -14,7 +14,7 @@ import { Provider } from "react-redux"; // Provides the store to all the compone
 import { startSetExpenses } from "./redux/actions/expenses";
 
 //FIREBASE
-import "./firebase/firebase.js";
+import { firebase } from "./firebase/firebase.js";
 const store = configureStore();
 
 const jsx = (
@@ -27,4 +27,12 @@ ReactDOM.render(<p>Loading...</p>, document.getElementById("root"));
 
 store.dispatch(startSetExpenses()).then(() => {
   ReactDOM.render(jsx, document.getElementById("root"));
+});
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    console.log("log in");
+  } else {
+    console.log("log out");
+  }
 });
