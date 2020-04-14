@@ -10,7 +10,8 @@ export const addExpense = (expense) => ({
 
 export const startAddExpense = (expenseData = {}) => {
   console.log("startAddExpense -> startAddExpense");
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     const {
       description = "",
       note = "",
@@ -19,7 +20,7 @@ export const startAddExpense = (expenseData = {}) => {
     } = expenseData;
 
     const expense = { description, note, amount, createdAt };
-    db.ref("expenses")
+    db.ref(`users/${uid}/expenses`)
       .push(expense)
       .then((ref) => {
         dispatch(addExpense({ id: ref.key, ...expense }));
@@ -35,10 +36,11 @@ export const removeExpense = ({ id } = {}) => ({
 
 // START_REMOVE_EXPENSE
 export const startRemoveExpense = ({ id } = {}) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     // Return that promise!
     return db
-      .ref(`expenses/${id}`)
+      .ref(`users/${uid}/expenses/${id}`)
       .remove()
       .then(() => {
         console.log("Sucesfuly removed item");
@@ -59,9 +61,10 @@ export const editExpense = (id, updates) => ({
 
 // START_EDIT_EXPENSE
 export const startEditExpense = (id, updates) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     return db
-      .ref(`expenses/${id}`)
+      .ref(`users/${uid}/expenses/${id}`)
       .update(updates)
       .then(() => {
         dispatch(editExpense(id, updates));
@@ -80,11 +83,12 @@ export const setExpenses = (expenses) => ({
 
 // START_SET_EXPENSES
 export const startSetExpenses = () => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     const expenses = [];
     // NEED TO RETURN HERE SINCE WE'RE LOOKING FOR A PROMISE IN INDEX.JS
     return db
-      .ref("expenses")
+      .ref(`users/${uid}/expenses`)
       .once("value")
       .then((snapshot) => {
         snapshot.forEach((child) => {
