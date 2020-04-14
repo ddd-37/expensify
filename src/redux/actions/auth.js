@@ -6,3 +6,10 @@ export const startLogin = () => {
     return firebase.auth().signInWithPopup(googleAuthProvider);
   };
 };
+
+export const startLogOut = () => {
+  console.log("startLogOut");
+  return () => {
+    return firebase.auth().signOut();
+  };
+};

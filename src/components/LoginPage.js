@@ -2,16 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { startLogin } from "./../redux/actions/auth";
 
-const LoginPage = ({ dispatch }) => {
-  const handleLogin = () => {
-    dispatch(startLogin());
-  };
-
+const LoginPage = ({ startLogin }) => {
   return (
     <div>
-      <button onClick={handleLogin}>Login</button>
+      <button onClick={startLogin}>Login</button>
     </div>
   );
 };
 
-export default connect()(LoginPage);
+const mapDispatchToProps = {
+  startLogin,
+};
+
+export default connect(undefined, mapDispatchToProps)(LoginPage);

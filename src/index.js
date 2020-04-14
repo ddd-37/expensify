@@ -6,7 +6,7 @@ import "normalize.css/normalize.css";
 import "./styles/style.scss";
 
 // COMPONENTS
-import AppRouter from "./routers/AppRouter";
+import AppRouter, { history } from "./routers/AppRouter";
 
 //REDUX
 import configureStore from "./redux/store/configureStore";
@@ -23,16 +23,28 @@ const jsx = (
   </Provider>
 );
 
+let hasRendered = false;
+// Function to handle when the app renders
+const renderApp = () => {
+  if (!hasRendered) {
+    ReactDOM.render(jsx, document.getElementById("root"));
+    hasRendered = true;
+  }
+};
+
 ReactDOM.render(<p>Loading...</p>, document.getElementById("root"));
 
-store.dispatch(startSetExpenses()).then(() => {
-  ReactDOM.render(jsx, document.getElementById("root"));
-});
-
+// Code to handle log in and redierct of log out
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    console.log("log in");
+    store.dispatch(startSetExpenses()).then(() => {
+      renderApp();
+      if (history.location.pathname === "/") {
+        history.push("/dashboard");
+      }
+    });
   } else {
-    console.log("log out");
+    renderApp();
+    history.push("/");
   }
 });
