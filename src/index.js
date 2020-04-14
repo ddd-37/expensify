@@ -12,6 +12,7 @@ import AppRouter, { history } from "./routers/AppRouter";
 import configureStore from "./redux/store/configureStore";
 import { Provider } from "react-redux"; // Provides the store to all the components that make up our application
 import { startSetExpenses } from "./redux/actions/expenses";
+import { login, logout } from "./redux/actions/auth";
 
 //FIREBASE
 import { firebase } from "./firebase/firebase.js";
@@ -37,6 +38,7 @@ ReactDOM.render(<p>Loading...</p>, document.getElementById("root"));
 // Code to handle log in and redierct of log out
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
+    store.dispatch(login(user.uid));
     store.dispatch(startSetExpenses()).then(() => {
       renderApp();
       if (history.location.pathname === "/") {
@@ -44,6 +46,7 @@ firebase.auth().onAuthStateChanged((user) => {
       }
     });
   } else {
+    store.dispatch(logout());
     renderApp();
     history.push("/");
   }
