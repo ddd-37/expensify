@@ -14,10 +14,6 @@ const Header = ({ startLogOut }) => {
       <NavLink to="/create" activeClassName="is-active" exact={true}>
         Create Expense
       </NavLink>
-      <span> </span>
-      <NavLink to="/help" activeClassName="is-active" exact={true}>
-        Help Page
-      </NavLink>
       <button onClick={startLogOut}>Logout</button>
     </header>
   );
